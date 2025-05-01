@@ -30,29 +30,29 @@ button.addEventListener('click', function () {
     button.disabled = true;
     result.textContent = "";
 
-    let index = 0;
+    let index = Math.floor(Math.random() * activities.length); // random start index
     let delay = 100;
     const slowdownRate = 1.1;
-    const totalCycles = 20;
+    const totalCycles = 20 + Math.floor(Math.random() * 10); // adds randomness
+    let lastIndex = 0;
 
     function spinCycle(cycleCount) {
         if (cycleCount >= totalCycles) {
-            const finalActivity = activities[index % activities.length];
+            const finalActivity = activities[lastIndex % activities.length];
             result.textContent = finalActivity;
-
-            // Start cooldown and enable Unlock Early button
             startCooldown();
             return;
         }
 
         result.textContent = activities[index % activities.length];
+        lastIndex = index % activities.length;
         index++;
 
         setTimeout(() => {
             spinCycle(cycleCount + 1);
         }, delay);
 
-        delay = delay * slowdownRate;
+        delay *= slowdownRate;
     }
 
     spinCycle(0);
