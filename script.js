@@ -60,7 +60,8 @@ button.addEventListener('click', function () {
 
 unlockButton.addEventListener('click', () => {
     puzzleSection.classList.remove('hidden');
-    generatePuzzle(); //
+    generatePuzzle();
+    puzzleInput.focus();
 });
 
 let currentAnswer;
@@ -100,5 +101,11 @@ submitPuzzle.addEventListener('click', () => {
         puzzleFeedback.textContent = "✅ Correct! Spinner re-enabled.";
     } else {
         puzzleFeedback.textContent = "❌ Try again!";
+    }
+});
+
+puzzleInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        submitPuzzle.click(); // Triggers the same handler as clicking the button
     }
 });
